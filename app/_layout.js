@@ -1,5 +1,6 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native'
+import { StyleSheet, Text, View, Image, TouchableOpacity, FlatList } from 'react-native'
 import React from 'react'
+import userData from './status_section_db'
 
 const App = () => {
   return (
@@ -26,13 +27,38 @@ const App = () => {
       </View>
 
       {/* Status section */}
-      <View style={{ marginTop: 50 }}>
+      <View style={{ marginTop: 40, marginLeft: 25 }}>
         {/* My status section */}
-        <TouchableOpacity>
-          <Image source={{ uri: 'https://th.bing.com/th/id/OIP.6j2u37AjTo_Cg9_nbyUCyQHaGw?w=197&h=180&c=7&r=0&o=5&pid=1.7' }} style={{ width: 110, height: 110, borderRadius: 110 }}/>
-          {/* Plus icon */}
-          <Image/>
+        <TouchableOpacity activeOpacity={0.7} style={{ flexDirection: 'column' }}>
+          <View style={{ width: 80, height: 80 }}>
+            <Image source={{ uri: 'https://th.bing.com/th/id/OIP.6j2u37AjTo_Cg9_nbyUCyQHaGw?w=197&h=180&c=7&r=0&o=5&pid=1.7' }} style={{ width: 80, height: 80, borderRadius: 55 }}/>
+            {/* Plus icon */}
+            <View style={ styles.plus_icon }>
+              <Image source={{ uri: 'https://img.icons8.com/ios-filled/50/ffffff/plus-math.png' }} style={{ width: 20, height: 20 }}/>
+            </View>
+            <View>
+              <Text style={{ textAlign: 'center', paddingTop: 10, fontSize: 12, fontWeight: '500' }}>Your story</Text>
+            </View>
+          </View>
+          {/* Subtitle name */}
+          
         </TouchableOpacity>
+
+        {/* Other statuses */}
+        <FlatList
+                data={userData}
+                showsVerticalScrollIndicator={false}
+                // horizontal={true}
+                // numColumns={3}
+                // columnWrapperStyle={{ justifyContent: 'space-between' }}
+                renderItem={({ item }) => {
+                    return (
+                        <TouchableOpacity activeOpacity={0.7} style={[styles.container, { backgroundColor: 'red' }]}>
+                            <Text>THIS IS SI S IS II</Text>
+                        </TouchableOpacity>
+                    )
+                }}
+            />
       </View>
 
       {/* Home feed */}
@@ -51,5 +77,19 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -2,
     right: -2,
+  },
+
+  plus_icon: {
+    position: 'absolute',
+    bottom: 0, 
+    right: 0,
+    backgroundColor: '#1DA1F2',
+    borderColor: 'white',
+    borderWidth: 3,
+    borderRadius: 15,
+    width: 30,
+    height: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 })
